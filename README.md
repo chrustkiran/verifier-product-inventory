@@ -9,6 +9,8 @@ There are two ways to run this project
 1. in your IDE.
     * Open this project in the ide, and make sure you are using gradle from gradle-wrapper.properties file to avoid unnecessary errors
     * or you can install gradle 7.5.1 in your environment and point the directory to your ide gradle.
+    * Then you can load it as a gradle project.
+    * Open the test folder, inside that you would be able to find some test classes, so you can use the IDE 'Run Test' feature to execute.
 2. Terminal
    * Since this is gradle project it has gradlew it will fetch the required version
    * please don't forget to give necessary permission to gradlew file `chmod +x gradlew`
