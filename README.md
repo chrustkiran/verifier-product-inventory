@@ -11,5 +11,6 @@ There are two ways to run this project
     * or you can install gradle 7.5.1 in your environment and point the directory to your ide gradle.
 2. Terminal
    * Since this is gradle project it has gradlew it will fetch the required version
-   * So please run `gradlew clean test --info`
+   * please don't forget to give necessary permission to gradlew file `chmod +x gradlew`
+   * So please run `./gradlew clean test --info`
    * you can see the report in `build/reports/tests/test` folder, you can use your browser to view the report.
