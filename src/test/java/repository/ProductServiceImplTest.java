@@ -37,7 +37,7 @@ public class ProductServiceImplTest {
     }
 
     @Test
-    public void addProductWithValidId() {
+    public void verifyAddProductWithValidIdShouldSucceed() {
         //creating a product
         Product product = new Product(1, "Product 1", Category.PRODUCT_1, 500.21);
         //adding product
@@ -48,7 +48,7 @@ public class ProductServiceImplTest {
 
 
     @Test
-    public void addProductWithEmptyValue() {
+    public void verifyAddProductWithEmptyValueShouldThrowException() {
         Product product = null;
         Exception exception = assertThrows(BadArgumentsException.class, () -> {
             productRepository.addProduct(product);
@@ -57,7 +57,7 @@ public class ProductServiceImplTest {
     }
 
     @Test()
-    public void addProductWithDuplicateValidId() {
+    public void verifyAddProductWithDuplicateValidIdShouldThrowException() {
         Product product = new Product(1, "Product 1", Category.PRODUCT_1, 500.21);
         productRepository.addProduct(product);
         Exception exception = assertThrows(DuplicateIdException.class, () -> {
@@ -67,7 +67,7 @@ public class ProductServiceImplTest {
     }
 
     @Test
-    public void findByIdWithValidIdShouldHaveResult() {
+    public void verifyFindByIdWithValidIdShouldHaveSuccessfulResult() {
         Product product = new Product(1, "Product 1", Category.PRODUCT_1, 500.21);
         Product addedProduct = productRepository.addProduct(product);
         Optional<Product> foundProduct = productRepository.findProductById(1);
@@ -76,13 +76,13 @@ public class ProductServiceImplTest {
     }
 
     @Test
-    public void findByIdWithInValidIdShouldHaveEmpty() {
+    public void verifyFindByIdWithInValidIdShouldHaveEmptyResult() {
         Optional<Product> foundProduct = productRepository.findProductById(1);
         assertTrue(foundProduct.isEmpty());
     }
 
     @Test
-    public void deleteAllShouldEmptyTheList() {
+    public void verifyDeleteAllShouldEmptyTheListSuccessfully() {
         Product product1 = new Product(1, "Product 1", Category.PRODUCT_1, 500.21);
         productRepository.addProduct(product1);
         productRepository.deleteAllProducts();
@@ -90,7 +90,7 @@ public class ProductServiceImplTest {
     }
 
     @Test
-    public void updateExistingProductShouldBeSuccessful() {
+    public void verifyUpdateExistingProductShouldBeSuccessful() {
         Product product1 = new Product(1, "Product 1", Category.PRODUCT_1, 500.21);
         productRepository.addProduct(product1);
         Product product2 = new Product(1, "Product 1", Category.PRODUCT_2, 505.21);
@@ -103,7 +103,7 @@ public class ProductServiceImplTest {
     }
 
     @Test
-    public void updateNonExistingProductShouldThrowError() {
+    public void verifyUpdateNonExistingProductShouldThrowException() {
         Product product1 = new Product(1, "Product 1", Category.PRODUCT_1, 500.21);
         Exception exception = assertThrows(NoRecordFoundException.class, () -> {
             productRepository.updateProduct(product1, 1);
@@ -112,7 +112,7 @@ public class ProductServiceImplTest {
     }
 
     @Test
-    public void updateWithNullProductIdShouldThrowError() {
+    public void verifyUpdateWithNullProductIdShouldThrowException() {
         Product product1 = new Product(1, "Product 1", Category.PRODUCT_1, 500.21);
         Exception exception = assertThrows(BadArgumentsException.class, () -> {
             productRepository.updateProduct(product1, null);
@@ -121,16 +121,16 @@ public class ProductServiceImplTest {
     }
 
     @Test
-    public void deleteProductShouldBeSuccessful() {
+    public void verifyDeleteProductShouldBeSuccessful() {
         Product product = new Product(1, "Product 1", Category.PRODUCT_1, 100.0, 0.5);
         productRepository.addProduct(product);
         assertEquals(productRepository.findAll().size(), 1);
-        productRepository.deleteProductById(1);
-        assertEquals(productRepository.findAll().size(), 0);
+        List<Product> deletedProducts = productRepository.deleteProductById(1);
+        assertEquals(deletedProducts.size(), 0);
     }
 
     @Test
-    public void deleteWithNullProductIdShouldThrowError() {
+    public void verifyDeleteWithNullProductIdShouldThrowException() {
         Exception exception = assertThrows(BadArgumentsException.class, () -> {
             productRepository.deleteProductById(null);
         });
@@ -138,7 +138,7 @@ public class ProductServiceImplTest {
     }
 
     @Test
-    public void findAllShouldReturnAllTheProducts() {
+    public void verifyFindAllShouldReturnAllTheProductsSuccessfully() {
         //creating dummy products
         Product product1 = new Product(1, "Product 1", Category.PRODUCT_1, 100.0, 0.25);
         Product product2 = new Product(2, "Product 2", Category.PRODUCT_2, 100.0, 0.35);
@@ -250,6 +250,8 @@ public class ProductServiceImplTest {
         productRepository.addProduct(product2);
         productRepository.addProduct(product3);
         productRepository.addProduct(product4);
+        productRepository.addProduct(product5);
+        productRepository.addProduct(product6);
 
         List<Product> productList = productRepository.findDiscountedProducts(Optional.empty(), Optional.empty());
 

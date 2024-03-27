@@ -17,7 +17,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     private List<Product> productList = Collections.unmodifiableList(new ArrayList<>());
 
     @Override
-    public Product addProduct(Product product) throws InventoryException {
+    public Product addProduct(Product product) {
         //checking null values
         ValidationUtils.checkValidProduct(product);
         if(isProductIdExisting(product.getProductId())) throw new DuplicateIdException(String.format
@@ -38,7 +38,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public Product updateProduct(Product product, Integer productId) throws InventoryException {
+    public Product updateProduct(Product product, Integer productId) {
         //check null for product and productId
         ValidationUtils.checkValidProduct(product);
         ValidationUtils.checkValidProductId(productId);
@@ -51,7 +51,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public synchronized void deleteProductById(Integer productId) {
+    public synchronized List<Product> deleteProductById(Integer productId) {
         //null check for productId
         ValidationUtils.checkValidProductId(productId);
         if (!isProductIdExisting(productId)) { throw new NoRecordFoundException(String.format
@@ -59,6 +59,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         }
         productList = productList.stream().filter(existingProduct -> !existingProduct.getProductId().
                 equals(productId)).collect(Collectors.toUnmodifiableList());
+        return productList;
     }
 
 

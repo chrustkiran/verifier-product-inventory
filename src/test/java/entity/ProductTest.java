@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProductTest {
 
     @Test
-    public void createValidProductWithDiscount() {
+    public void verifyCreateValidProductWithDiscountShouldSucceed() {
         String name ="Computer";
         Product product = new Product(1, name, Category.PRODUCT_1, 1000.0, 0.05);
         assertEquals(product.getProductId(), 1);
@@ -22,7 +22,7 @@ public class ProductTest {
     }
 
     @Test
-    public void createValidProductWithoutDiscountUsingSecondConstructor() {
+    public void verifyCreateValidProductWithoutDiscountShouldSucceed() {
         String name ="Computer";
         Product product = new Product(1, name, Category.PRODUCT_1, 1000.0);
         assertEquals(product.getProductId(), 1);
@@ -33,7 +33,7 @@ public class ProductTest {
     }
 
     @Test
-    public void createValidProductWithoutDiscountUsingFirstConstructor() {
+    public void createValidProductWithNullDiscountShouldSucceed() {
         String name ="Computer";
         Product product = new Product(1, name, Category.PRODUCT_1, 1000.0, null);
         assertEquals(product.getProductId(), 1);
@@ -44,7 +44,7 @@ public class ProductTest {
     }
 
     @Test
-    public void creatingInvalidProductShoudThrowError() {
+    public void creatingInvalidProductShouldThrowError() {
         String name ="Computer";
         Exception exception = assertThrows(BadArgumentsException.class, () -> {
             new Product(null, name, Category.PRODUCT_1, 1000.0, null);

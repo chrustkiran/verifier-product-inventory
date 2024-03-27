@@ -11,7 +11,7 @@ public interface ValidationUtils {
         }
     }
      static void checkValidProductId(Integer productId) {
-        //we can perform some argument check here related to product
+        //we can perform some argument check here related to product id
         if (productId == null) {
             throw new BadArgumentsException("ProductId is null");
         }
